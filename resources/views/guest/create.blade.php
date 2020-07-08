@@ -12,27 +12,28 @@
           </div>
         <div class="row">
           <div class="col-12">
-            <form class="form-row">
+            <form class="form-row" method="POST" action="{{ route('note-create') }}">
+                @csrf
               <div class="form-group col-md-12">
                 <label>Message</label>
                 <textarea class="form-control" rows="4" name="text" required placeholder="Secret message..."></textarea>
               </div>
                 <div class="form-group col-md-12">
                     <label>Passware</label>
-                    <input type="text" class="form-control"  placeholder="Passware" required>
+                    <input type="text" class="form-control" name="passware"  placeholder="Passware" required>
                 </div>
 
               <div class="form-group col-md-5 select-border">
                 <label>Auto-destroy after:</label>
-                <select class="form-control basic-select">
-                  <option value="value 01" selected="selected">1 minute</option>
-                  <option value="value 02">5 minutes</option>
-                  <option value="value 03">30 minutes</option>
-                  <option value="value 03">1 hour</option>
-                  <option value="value 03">6 hours</option>
-                  <option value="value 03">12 hours</option>
-                  <option value="value 03">1 day</option>
-                  <option value="value 03">7 days</option>
+                <select class="form-control basic-select" name="time_destroy">
+                  <option value="60" selected="selected">1 minute</option>
+                  <option value="300">5 minutes</option>
+                  <option value="1800">30 minutes</option>
+                  <option value="3600">1 hour</option>
+                  <option value="21000">6 hours</option>
+                  <option value="43200">12 hours</option>
+                  <option value="86400">1 day</option>
+                  <option value="604800">7 days</option>
                 </select>
               </div>
                 <div class="col-md-2 p-5 text-center">
@@ -42,20 +43,16 @@
               <div class="form-group col-md-5 select-border">
                   <div class="form-group col-md-12">
                       <label>After <b>N</b> views:</label>
-                      <input type="text" class="form-control"  placeholder="Count" value="1" required>
+                      <input type="number" name="views_destroy" class="form-control"  placeholder="Count" value="1" required>
                   </div>
               </div>
-
+                <div class="col-md-12">
+                    <button class="btn btn-primary" type="submit">Post Job</button>
+                </div>
             </form>
           </div>
         </div>
-        <form class="form-row align-items-end">
 
-
-          <div class="col-md-12">
-            <a class="btn btn-primary" href="#">Post Job</a>
-          </div>
-        </form>
       </div>
     </section>
   </div>
