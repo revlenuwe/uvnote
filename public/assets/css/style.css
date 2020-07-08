@@ -60,7 +60,7 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
 [ End table content ]
 ======================================*/
 /*****************************
-	Typography 
+	Typography
 *****************************/
 body {
   font-family: "Poppins", sans-serif;
@@ -1334,7 +1334,7 @@ hr {
   font-size: 12px; }
 
 /*****************************
-	Counter 
+	Counter
 *****************************/
 .counter {
   display: -webkit-box;
@@ -1559,7 +1559,7 @@ hr {
   font-weight: normal; }
 
 /*****************************
-	Owl carousel 
+	Owl carousel
 *****************************/
 .owl-nav-top-center .owl-nav .owl-next {
   right: 40%;
@@ -1649,7 +1649,7 @@ hr {
   background: #ff8a00; }
 
 /*****************************
-    Pricing 
+    Pricing
 *****************************/
 .pricing-plan {
   border: 1px solid #f6f6f6;
@@ -1792,7 +1792,7 @@ hr {
   border-color: #ff8a00 !important; }
 
 /*****************************
-	Button 
+	Button
 *****************************/
 .btn {
   -webkit-transition: all 0.3s ease-in-out;
@@ -2114,7 +2114,7 @@ button {
     color: #969696; }
 
 /*****************************
-	Datetimepicker 
+	Datetimepicker
 *****************************/
 .bootstrap-datetimepicker-widget table td.active {
   background-color: #ff8a00; }
@@ -2137,7 +2137,7 @@ button {
   width: 19rem; }
 
 /*****************************
-  Header 
+  Header
 *****************************/
 .header {
   background: #ffffff; }
@@ -4951,7 +4951,7 @@ iframe {
     transition: all 0.3s ease-in-out; }
 
 /*****************************
-    Not found 
+    Not found
 *****************************/
 .notfound-404 {
   height: 230px;
@@ -4975,7 +4975,7 @@ iframe {
 	Footer
 *****************************/
 .footer {
-  padding-top: 90px;
+  /*padding-top: 90px;*/
   margin-top: -100px;
   color: #626262; }
   .footer ul {
@@ -5044,7 +5044,7 @@ iframe {
   color: #0077b5; }
 
 /*****************************
-	Login 
+	Login
 *****************************/
 .login-register fieldset {
   border: 1px solid #eeeeee;

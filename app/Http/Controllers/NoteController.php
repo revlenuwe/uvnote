@@ -23,4 +23,6 @@ class NoteController extends Controller
 
         return back();//Return json to vue
     }
+
+    
 }
