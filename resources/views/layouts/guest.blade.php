@@ -17,10 +17,10 @@
       <a class="navbar-brand" href="index.html">
         LOGO
       </a>
-     
+
       <div class="add-listing">
-          
-          <a class="btn btn-white btn-md" href=""> <i class="fas fa-plus-circle"></i>Post a job</a>
+
+          <a class="btn btn-white btn-md" href=""> <i class="fas fa-plus-circle"></i>Create secret</a>
         </div>
     </div>
   </nav>
