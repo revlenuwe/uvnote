@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Note;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 
 class NoteController extends Controller
@@ -23,7 +24,11 @@ class NoteController extends Controller
 
         return response()->json([
             'link' => $r->getSchemeAndHttpHost().'/'.$note->id
-        ]);//Return json to vue
+        ]);
+    }
+
+    public function note(){
+        return view('guest.note');
     }
 
 

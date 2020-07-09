@@ -1,4 +1,4 @@
-<footer class="footer bg-light">
+<footer class="footer fixed-bottom">
   <div class="position-relative">
     <div class="footer-bottom bg-dark mt-5">
       <div class="container">
