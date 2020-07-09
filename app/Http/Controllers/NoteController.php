@@ -21,8 +21,10 @@ class NoteController extends Controller
             'views_destroy' => $r->views_destroy
         ]);
 
-        return back();//Return json to vue
+        return response()->json([
+            'link' => $r->getSchemeAndHttpHost().'/'.$note->id
+        ]);//Return json to vue
     }
 
-    
+
 }

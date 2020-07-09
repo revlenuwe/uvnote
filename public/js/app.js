@@ -1964,8 +1964,31 @@ __webpack_require__.r(__webpack_exports__);
   props: ['csrf'],
   data: function data() {
     return {
-      link: null
+      text: null,
+      passware: null,
+      time_destroy: 60,
+      views_destroy: 1,
+      link: null,
+      created: false
     };
+  },
+  methods: {
+    create: function create() {
+      var _this = this;
+
+      axios.post('/create', {
+        _token: this.csrf,
+        text: this.text,
+        passware: this.passware,
+        time_destroy: this.time_destroy,
+        views_destroy: this.views_destroy
+      }).then(function (response) {
+        _this.link = response.data.link;
+        _this.created = true;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    }
   }
 });
 
@@ -37592,8 +37615,225 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function () {}
-var staticRenderFns = []
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("form", { staticClass: "form-row", attrs: { method: "POST" } }, [
+    _vm.created
+      ? _c("div", { staticClass: "col-lg-12  mb-4" }, [
+          _c(
+            "div",
+            { staticClass: "feature-info feature-info-02 p-2 p-lg-2 bg-dark" },
+            [
+              _c(
+                "div",
+                { staticClass: "feature-info-content text-white pl-sm-4 pl-0" },
+                [
+                  _c("h5", { staticClass: "text-white m-0" }, [
+                    _vm._v(_vm._s(_vm.link))
+                  ])
+                ]
+              )
+            ]
+          )
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _c("input", {
+      attrs: { type: "hidden", name: "_token" },
+      domProps: { value: _vm.csrf }
+    }),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group col-md-12" }, [
+      _c("label", [_vm._v("Message")]),
+      _vm._v(" "),
+      _c("textarea", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.text,
+            expression: "text"
+          }
+        ],
+        staticClass: "form-control",
+        attrs: {
+          rows: "4",
+          name: "text",
+          required: "",
+          placeholder: "Secret message..."
+        },
+        domProps: { value: _vm.text },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.text = $event.target.value
+          }
+        }
+      })
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group col-md-12" }, [
+      _c("label", [_vm._v("Passware")]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.passware,
+            expression: "passware"
+          }
+        ],
+        staticClass: "form-control",
+        attrs: {
+          type: "text",
+          name: "passware",
+          placeholder: "Passware",
+          required: ""
+        },
+        domProps: { value: _vm.passware },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.passware = $event.target.value
+          }
+        }
+      })
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group col-md-5 select-border" }, [
+      _c("label", [_vm._v("Auto-destroy after:")]),
+      _vm._v(" "),
+      _c(
+        "select",
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.time_destroy,
+              expression: "time_destroy"
+            }
+          ],
+          staticClass: "form-control basic-select",
+          attrs: { name: "time_destroy" },
+          on: {
+            change: function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.time_destroy = $event.target.multiple
+                ? $$selectedVal
+                : $$selectedVal[0]
+            }
+          }
+        },
+        [
+          _c("option", { attrs: { value: "60", selected: "" } }, [
+            _vm._v("1 minute")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "300" } }, [_vm._v("5 minutes")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "1800" } }, [_vm._v("30 minutes")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "3600" } }, [_vm._v("1 hour")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "21000" } }, [_vm._v("6 hours")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "43200" } }, [_vm._v("12 hours")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "86400" } }, [_vm._v("1 day")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "604800" } }, [_vm._v("7 days")])
+        ]
+      )
+    ]),
+    _vm._v(" "),
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group col-md-5 select-border" }, [
+      _c("div", { staticClass: "form-group col-md-12" }, [
+        _vm._m(1),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.views_destroy,
+              expression: "views_destroy"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: {
+            type: "number",
+            name: "views_destroy",
+            placeholder: "Count",
+            required: ""
+          },
+          domProps: { value: _vm.views_destroy },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.views_destroy = $event.target.value
+            }
+          }
+        })
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-md-12" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary",
+          attrs: { type: "button" },
+          on: {
+            click: function($event) {
+              return _vm.create()
+            }
+          }
+        },
+        [_vm._v("Create note")]
+      )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-2 p-5 text-center" }, [
+      _c("b", [_vm._v("OR")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", [
+      _vm._v("After "),
+      _c("b", [_vm._v("N")]),
+      _vm._v(" views:")
+    ])
+  }
+]
+render._withStripped = true
 
 
 

@@ -1,7 +1,7 @@
 @extends('layouts.guest')
 
 @section('content')
-    <div class="tab-content" id="myTabContent">
+    <div class="tab-content" id="app">
         <div class="tab-pane fade active show" id="Job-detail" role="tabpanel" aria-labelledby="Job-detail-tab">
             <section class="space-ptb">
                 <div class="container">
