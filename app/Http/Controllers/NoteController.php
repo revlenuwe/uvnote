@@ -17,7 +17,7 @@ class NoteController extends Controller
     public function create(Request $r){
         $note = Note::create([
             'text' => $r->text,
-            'passware' => Hash::make($r->passware),
+            'passphrase' => Hash::make($r->passphrase),
             'time_destroy' => Carbon::now()->addSeconds($r->time_destroy),
             'views_destroy' => $r->views_destroy
         ]);
@@ -29,6 +29,13 @@ class NoteController extends Controller
 
     public function note(){
         return view('guest.note');
+    }
+
+    public function checkPassphrase(Note $note,Request $r){
+        if(!Hash::check($r->passphrase,$note->passphrase)){
+            return response()->json(['identical' => false]);
+        }
+        return response()->json(['identical' => true]);
     }
 
 

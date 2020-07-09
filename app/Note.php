@@ -9,7 +9,7 @@ class Note extends Model
     protected $table = 'notes';
 
     protected $fillable = [
-        'text','passware','time_destroy','views_destroy'
+        'text','passphrase','time_destroy','views_destroy'
     ];
 
     protected $dates = [

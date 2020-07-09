@@ -14,8 +14,8 @@
                       placeholder="Secret message..."></textarea>
         </div>
         <div class="form-group col-md-12">
-            <label>Passware</label>
-            <input type="text" class="form-control" v-model="passware" name="passware" placeholder="Passware"
+            <label>Passphrase</label>
+            <input type="text" class="form-control" v-model="passphrase" name="passphrase" placeholder="Passphrase"
                    required>
         </div>
 
@@ -58,7 +58,7 @@
         data () {
             return {
                 text: null,
-                passware: null,
+                passphrase: null,
                 time_destroy: 60,
                 views_destroy: 1,
                 link: null,
@@ -68,7 +68,7 @@
         methods: {
             create () {
                 axios.post('/create',{
-                    _token: this.csrf, text: this.text, passware: this.passware, time_destroy: this.time_destroy, views_destroy: this.views_destroy
+                    _token: this.csrf, text: this.text, passphrase: this.passphrase, time_destroy: this.time_destroy, views_destroy: this.views_destroy
                 }).then(response => {
                     this.link = response.data.link;
                     this.created = true;
