@@ -3,11 +3,11 @@
         <div class="col-lg-12 col-sm-10 text-center align-self-center">
             <b class="bg-slider-sub-title">Write the Passphrase to unlock note</b>
             <div class="search mt-4">
-                <a class="btn" href="#">Unlock </a>
-                <input type="text" class="form-control bold-border" placeholder="Passphrase">
+                <a class="btn" href="javascript:void(0)" @click="checkPassphrase()">Unlock </a>
+                <input type="text" class="form-control bold-border" v-model="inputPassphrase" placeholder="Passphrase">
             </div>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-12" v-if="unlocked">
             <div class="job-shortby ml-sm-auto d-flex align-items-center float-right">
                 <div class="filter-btn ml-sm-3 ml-auto">
                     <div class="btn-group btn-group-sm" role="group">
@@ -18,11 +18,11 @@
             </div>
         </div>
 
-        <div class="col-md-12">
+        <div class="col-md-12" v-if="unlocked">
             <div class="card mt-3">
                 <div class="card-body">
                     <blockquote class="blockquote quote-orange">
-                        TEsTEst
+                        {{ text }}
                     </blockquote>
                 </div>
             </div>
@@ -34,18 +34,27 @@
     export default {
         name: "Note",
         props: [
-            'csrf','text','passphrase','sign'
+            'csrf','passphrase','sign'
         ],
-        // data () {
-        //     return {
-        //         text: null,
-        //         passphrase: null,
-        //         sign:
-        //     }
-        // },
+        data () {
+            return {
+                inputPassphrase: null,
+                unlocked: false,
+                text: null
+            }
+        },
         methods: {
             checkPassphrase () {
-                axios.post('/passphrase/'.)
+                axios.post('/passphrase/' + this.sign,{
+                    _token: this.csrf, passphrase: this.inputPassphrase
+                }).then(response => {
+                    if(response.data.identical === true){
+                        this.unlocked = true;
+                        this.text = response.data.text;
+                    }else{
+                        //error ntf
+                    }
+                })
             }
         }
     }

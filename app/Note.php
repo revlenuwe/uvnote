@@ -9,10 +9,15 @@ class Note extends Model
     protected $table = 'notes';
 
     protected $fillable = [
-        'text','passphrase','time_destroy','views_destroy'
+        'sign','text','passphrase','time_destroy','views_destroy'
     ];
 
     protected $dates = [
         'time_destroy'
     ];
+
+    public function getRouteKeyName()
+    {
+        return 'sign';
+    }
 }
