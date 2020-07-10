@@ -1,5 +1,7 @@
 <template>
     <form class="form-row" method="POST">
+        <form-errors v-if="errors" :errors="errors"></form-errors>
+
         <div class="col-lg-12  mb-4" v-if="created">
             <div class="feature-info feature-info-02 p-2 p-lg-2 bg-dark">
                 <div class="feature-info-content w-100 justify-content-between d-flex text-white pl-sm-4 pl-0">
@@ -67,18 +69,24 @@
                 views_destroy: 1,
                 link: null,
                 copied: false,
-                created: false
+                created: false,
+
+                errors: null
             }
         },
         methods: {
             create () {
+                this.errors = null;
                 axios.post('/create',{
                     _token: this.csrf, text: this.text, passphrase: this.passphrase, time_destroy: this.time_destroy, views_destroy: this.views_destroy
                 }).then(response => {
                     this.link = response.data.link;
                     this.created = true;
                 }).catch(error => {
-                    console.log(error)
+                    if (error.response.status === 422){
+                        console.log(error.response.data.errors);
+                        this.errors = error.response.data.errors;
+                    }
                 });
             },
             onCopy () {

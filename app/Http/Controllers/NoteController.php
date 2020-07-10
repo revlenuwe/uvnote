@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateNoteReq;
 use App\Note;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -15,7 +16,7 @@ class NoteController extends Controller
         return view('guest.create');
     }
 
-    public function create(Request $r){
+    public function create(CreateNoteReq $r){
         $note = Note::create([
             'sign' => Str::random(32),
             'text' => Crypt::encryptString($r->text),

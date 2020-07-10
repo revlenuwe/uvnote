@@ -6520,7 +6520,7 @@ iframe {
 }
 
 .footer-bottom {
-    padding: 20px 0px 20px;
+    padding: 10px 0px 10px;
     color: #969696;
 }
 
@@ -7107,6 +7107,10 @@ iframe {
         display: inline-block;
         text-align: center;
         width: 100%;
+    }
+
+    .list-group {
+        list-style: none !important;
     }
 
     .banner-bg-slider-content .job-search-item input {

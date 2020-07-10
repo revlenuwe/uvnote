@@ -1,6 +1,7 @@
 @extends('layouts.guest')
 
 @section('content')
+
     <div class="tab-content" id="app">
         <section class="space-ptb">
             <div class="container">
