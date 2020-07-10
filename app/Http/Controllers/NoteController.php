@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class NoteController extends Controller
 {
@@ -16,6 +17,7 @@ class NoteController extends Controller
 
     public function create(Request $r){
         $note = Note::create([
+            'sign' => Str::random(32),
             'text' => $r->text,
             'passphrase' => Hash::make($r->passphrase),
             'time_destroy' => Carbon::now()->addSeconds($r->time_destroy),
@@ -27,8 +29,9 @@ class NoteController extends Controller
         ]);
     }
 
-    public function note(){
-        return view('guest.note');
+    public function note(Note $note){
+
+        return view('guest.note',compact('note'));
     }
 
     public function checkPassphrase(Note $note,Request $r){
