@@ -2363,9 +2363,9 @@ button {
     color: #ffffff;
 }
 
-.btn i {
-    padding-right: 10px;
-}
+/*.btn i {*/
+/*    padding-right: 10px;*/
+/*}*/
 
 .btn + .btn {
     margin-left: 3px;
@@ -6520,7 +6520,7 @@ iframe {
 }
 
 .footer-bottom {
-    padding: 40px 0px 40px;
+    padding: 20px 0px 20px;
     color: #969696;
 }
 

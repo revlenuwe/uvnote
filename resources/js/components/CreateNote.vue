@@ -2,8 +2,12 @@
     <form class="form-row" method="POST">
         <div class="col-lg-12  mb-4" v-if="created">
             <div class="feature-info feature-info-02 p-2 p-lg-2 bg-dark">
-                <div class="feature-info-content text-white pl-sm-4 pl-0">
-                    <h5 class="text-white m-0">{{ link }}</h5>
+                <div class="feature-info-content w-100 justify-content-between d-flex text-white pl-sm-4 pl-0">
+                    <h5 class="text-white pt-2">{{ link }}</h5>
+                    <button class="btn btn-sm btn-primary" type="button" v-clipboard:copy="link" v-clipboard:success="onCopy">
+                        <i class="fas fa-copy" v-if="!copied"></i>
+                        <i class="fas fa-clipboard-check" v-else></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -62,6 +66,7 @@
                 time_destroy: 60,
                 views_destroy: 1,
                 link: null,
+                copied: false,
                 created: false
             }
         },
@@ -75,6 +80,9 @@
                 }).catch(error => {
                     console.log(error)
                 });
+            },
+            onCopy () {
+                this.copied = true;
             }
         }
     }
