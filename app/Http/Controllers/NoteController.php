@@ -31,22 +31,32 @@ class NoteController extends Controller
     }
 
     public function note(Note $note){
-        if((Carbon::now() < $note->time_destroy) && ($note->views_destroy > 0)){
+        if(!$note->trashed()){
+            if((Carbon::now() > $note->time_destroy) || ($note->views_destroy <= 0)){
+                $note->delete();
+                return view('errors.404');
+            }
+
             $note->decrement('views_destroy');
             return view('guest.note',compact('note'));
         }
-        //error view
+        return view('errors.404');
     }
 
     public function checkPassphrase(Note $note,Request $r){
-        if(!Hash::check($r->passphrase,$note->passphrase)){
-            return response()->json(['identical' => false]);
-        }
+        if(!$note->trashed()){
+            if(!Hash::check($r->passphrase,$note->passphrase)){
+                return response()->json(['passphrase' => [
+                    'Invalid passphrase'
+                ]], 422);
+            }
 
-        return response()->json([
-            'identical' => true,
-            'text' => Crypt::decryptString($note->text)
-        ]);
+            return response()->json([
+                'identical' => true,
+                'text' => Crypt::decryptString($note->text)
+            ]);
+        }
+        return response()->json(['error' => 'Not found'],404);
     }
 
 

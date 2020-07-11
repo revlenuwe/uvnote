@@ -2086,6 +2086,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Note",
   props: ['csrf', 'passphrase', 'sign'],
@@ -2093,13 +2097,15 @@ __webpack_require__.r(__webpack_exports__);
     return {
       inputPassphrase: null,
       unlocked: false,
-      text: null
+      text: null,
+      errors: null
     };
   },
   methods: {
     checkPassphrase: function checkPassphrase() {
       var _this = this;
 
+      this.errors = null;
       axios.post('/passphrase/' + this.sign, {
         _token: this.csrf,
         passphrase: this.inputPassphrase
@@ -2107,7 +2113,11 @@ __webpack_require__.r(__webpack_exports__);
         if (response.data.identical === true) {
           _this.unlocked = true;
           _this.text = response.data.text;
-        } else {//error ntf
+        }
+      })["catch"](function (error) {
+        if (error.response.status === 422) {
+          console.log(error.response.data);
+          _this.errors = error.response.data;
         }
       });
     }
@@ -38129,6 +38139,17 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row" }, [
+    _c(
+      "div",
+      { staticClass: "col-lg-12" },
+      [
+        _vm.errors
+          ? _c("form-errors", { attrs: { errors: _vm.errors } })
+          : _vm._e()
+      ],
+      1
+    ),
+    _vm._v(" "),
     _c(
       "div",
       { staticClass: "col-lg-12 col-sm-10 text-center align-self-center" },

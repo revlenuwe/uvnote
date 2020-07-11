@@ -1,5 +1,9 @@
 <template>
     <div class="row">
+        <div class="col-lg-12">
+            <form-errors v-if="errors" :errors="errors"></form-errors>
+        </div>
+
         <div class="col-lg-12 col-sm-10 text-center align-self-center">
             <b class="bg-slider-sub-title">Write the Passphrase to unlock note</b>
             <div class="search mt-4">
@@ -40,19 +44,24 @@
             return {
                 inputPassphrase: null,
                 unlocked: false,
-                text: null
+                text: null,
+                errors: null
             }
         },
         methods: {
             checkPassphrase () {
+                this.errors = null;
                 axios.post('/passphrase/' + this.sign,{
                     _token: this.csrf, passphrase: this.inputPassphrase
                 }).then(response => {
                     if(response.data.identical === true){
                         this.unlocked = true;
                         this.text = response.data.text;
-                    }else{
-                        //error ntf
+                    }
+                }).catch(error => {
+                    if (error.response.status === 422) {
+                        console.log(error.response.data);
+                        this.errors = error.response.data;
                     }
                 })
             }

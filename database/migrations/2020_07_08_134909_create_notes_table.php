@@ -20,6 +20,7 @@ class CreateNotesTable extends Migration
             $table->string('passphrase')->nullable();
             $table->timestamp('time_destroy');
             $table->integer('views_destroy');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
